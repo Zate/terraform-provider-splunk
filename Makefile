@@ -27,6 +27,10 @@ test:
 testacc:
 	TF_ACC=1 go test ./... -v
 
+docker-test : $(eval SHELL:=/bin/bash) $(eval DC:=`which docker-compose`)
+	@[ $(DC) == "/usr/local/bin/docker-compose" ] && cd test_server && docker-compose up -d && cd $(PWD) || echo "no docker-compose"
+	TF_ACC=1 SPLUNK_PASSWORD=stuff123 SPLUNK_HOME=so1:/opt/SPLUNK_ETC SPLUNK_USERNAME=admin SPLUNK_URL=localhost:8089 go test ./... -v
+
 init:
 	@terraform init
 
