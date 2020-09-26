@@ -10,7 +10,7 @@ resource "splunk_inputs_http_event_collector" "hec-token-01" {
   source     = "new:source"
   sourcetype = "new:sourcetype"
   disabled   = false
-  use_ack    = false
+  use_ack    = 0
   acl {
     owner   = "user01"
     sharing = "global"
@@ -25,7 +25,7 @@ terraform import splunk_inputs_http_event_collector.token01 <hec-token-name>
 ```
 
 ## Argument Reference
-For latest resource argument reference: https://docs.splunk.com/Documentation/Splunk/8.1.0/RESTREF/RESTinput#data.2Finputs.2Fhttp
+For latest resource argument reference: https://docs.splunk.com/Documentation/Splunk/latest/RESTREF/RESTinput#data.2Finputs.2Fhttp
 
 This resource block supports the following arguments:
 * `name` - (Required) Token name (inputs.conf key)

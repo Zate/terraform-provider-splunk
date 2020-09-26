@@ -9,6 +9,11 @@ provider "splunk" {
   username             = "admin"
   password             = "changeme"
   insecure_skip_verify = true
+  // Or use environment variables used:
+  // SPLUNK_USERNAME
+  // SPLUNK_PASSWORD
+  // SPLUNK_URL
+  // SPLUNK_INSECURE_SKIP_VERIFY (Defaults to true)
 }
 
 resource "splunk_authorization_roles" "role01" {
@@ -75,6 +80,7 @@ resource "splunk_saved_searches" "new-search-01" {
   dispatch_latest_time      = "rt-0m"
   cron_schedule             = "*/15 * * * *"
   name                      = "new-search-01"
+  schedule_priority         = "default"
   search                    = "index=user01-index source=http:hec-token-01"
 
   acl {
